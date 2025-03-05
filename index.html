@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <style>
+        
+           
+        </style>
+
+    </head>
+    <body>
+        <div id="encabezado">
+            <h1>Encabezado</h1>
+
+            <h2>
+                Noticias
+            </h2>
+
+        </div>
+
+    </body>
+    <script>
+        
+        let x=10;
+        console.log(x);
+
+        let p = {"titulo": "Llano en llamas", "autor": "Juan Pablo"};
+        console.log(p);
+
+        function triplicar(a){
+            return 3*a;
+        }
+
+           
+
+           let h = document.getElementsByTagName("h1");
+           console.log(h);
+
+           let h2 = document.getElementById("encabezado");
+              console.log(h2);
+            
+         let h3= document.createElement("h1");
+            console.log(h3);
+
+          let h4= document.createTextNode("Hola");
+            console.log(h4);
+
+
+            async function veAlMuseo(){
+                let respuesta=await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/40");
+                console.log(respuesta);
+
+                let respuestaJSON=await respuesta.json();
+                console.log(respuestaJSON.artistAlphaSort);
+
+                let d = document.createElement("h2");
+                d.innerHTML= respuestaJSON.artistAlphaSort
+                document.body.appendChild(d);
+
+                let e = document.createElement("img");
+                e.src=respuestaJSON.primaryImage;
+                document.body.appendChild(e);
+            }
+
+            async function veASpotify() {
+                let r = await fetch("https://accounts.spotify.com/api/token",{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        grant_type: 'client_credentials',
+                        client_id: "60c9a704ce204c328b9a028b8c940f8e",
+                        client_secret: '59e05d00b3bf4810b8049ec1def37223' 
+                    })
+                });
+
+                
+            
+                let rJSON = await r.json();
+                console.log(rJSON);
+                return rJSON.access_token;
+            }
+            veASpotify();
+
+
+
+            veAlMuseo();
+    </script>
+</html>
